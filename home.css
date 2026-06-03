@@ -208,7 +208,8 @@
 }
 
 .feature-card.featured p {
-  color: var(--text-muted);
+  color:#000;
+  text-align: center;
 }
 
 .feature-card.featured .feature-link {
@@ -232,7 +233,8 @@
 
 .feature-card p {
   font-size: 13px;
-  color: rgba(255,255,255,0.8);
+  color: #fff;
+  text-align: center;
   line-height: 22px;
   margin-bottom: 18px;
 }
@@ -242,7 +244,8 @@
   font-weight: 600;
   color: var(--white);
   text-decoration: none;
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 6px;
   letter-spacing: 0.3px;
@@ -398,8 +401,10 @@
 
 .product-info p {
   font-size: 12px;
-  color: var(--text-muted);
+  color: #000;
+  font-weight: 400;
   line-height: 19px;
+  text-align: center;
 }
 
 .rd-section {
@@ -462,9 +467,9 @@
 
 .testimonial-card > p {
   font-size: 16px;
-  color: var(--text);
+  color: #000;
   line-height: 28px;
-  font-weight: 300;
+  font-weight: 500;
   margin-bottom: 28px;
   max-width: 680px;
 }
@@ -498,7 +503,7 @@
 
 .testimonial-author span {
   font-size: 12px;
-  color: var(--text-muted);
+  color: #000;
 }
 
 .t-btn {
@@ -615,6 +620,7 @@
   color: var(--orange);
   display: block;
   margin-bottom: 8px;
+  text-align: center;
 }
 
 .blog-info h3 {
@@ -623,11 +629,14 @@
   color: var(--text);
   line-height: 23px;
   margin-bottom: 8px;
+  text-align: center;
 }
 
 .blog-info p {
   font-size: 13px;
-  color: var(--text-muted);
+  color: #000;
+  text-align: center;
+  font-weight: 500;
   line-height: 21px;
   margin-bottom: 14px;
 }
@@ -636,8 +645,9 @@
   font-size: 12px;
   font-weight: 600;
   color: var(--orange);
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   transition: gap 0.2s;
 }

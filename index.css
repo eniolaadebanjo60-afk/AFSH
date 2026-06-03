@@ -336,9 +336,7 @@ footer {
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.08);
   padding-top: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  text-align: center;
   font-size: 12px;
   color: #fff;
 }

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AFSH – The Source You Can Trust</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@200,300,400,500,600,700,1&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="index.css"/>
+  <link rel="stylesheet" href="home.css"/>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="AMOfarm-LOGO.png">
+    </a>
+    <button class="menu-toggle" id="mobileMenuBtn" aria-label="Toggle menu">
+      <i class="fa-solid fa-bars" id="menuIcon"></i>
+    </button>
+    <ul class="nav-links" id="navList">
+      <li><a href="about.html">Who We Are</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="rd.html">Research &amp; Development</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="careers.html">Careers</a></li>
+    </ul>
+  </nav>
+  <div class="home">
+    <div class="hero-slider">
+      <div class="hero-slides">
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=1600&q=80')">
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <div class="hero-tag">Nigeria's #1 Hatchery</div>
+            <h1>Quality Chicks,<br><span>Thriving Farms.</span></h1>
+            <p>Amo Farm is Nigeria's trusted name in day-old chick production, delivering top-quality chicks to support successful poultry farming across Africa.</p>
+            <div class="hero-btns">
+              <a href="products.html" class="btn-primary">Explore Products &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+              <a href="about.html" class="btn-outline">Who We Are</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1612170153139-6f881ff067e0?w=1600&q=80')">
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <div class="hero-tag">Cutting-Edge Technology</div>
+            <h1>Innovation at<br><span>Every Stage.</span></h1>
+            <p>With precision-controlled incubation and rigorous biosecurity measures, we ensure high hatch rates and disease-free chicks for your farm.</p>
+            <div class="hero-btns">
+              <a href="rd.html" class="btn-primary">Our R&amp;D &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+              <a href="contact.html" class="btn-outline">Contact Us</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=1600&q=80')">
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <div class="hero-tag">Expanding Across Africa</div>
+            <h1>Growing Together<br><span>Across Africa.</span></h1>
+            <p>From Nigeria to the continent — Amo Farm is committed to transforming agriculture and food security across Africa, one flock at a time.</p>
+            <div class="hero-btns">
+              <a href="about.html" class="btn-primary">Learn More &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+              <a href="careers.html" class="btn-outline">Join Our Team</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="slider-btn slider-prev" id="heroPrev"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="slider-btn slider-next" id="heroNext"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="slider-dots" id="heroDots"></div>
+    </div>
+  
+    <div class="stats-strip fade-in">
+      <div class="section-inner">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">2003</div>
+            <div class="stat-label">Established</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">Years of Excellence</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Chick Varieties</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Locations Nationwide</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <section class="features-section fade-in">
+      <div class="section-inner">
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-medal"></i></div>
+            <h3>Premium Quality</h3>
+            <p>Our commitment to premium quality sets us apart, making Amo chicks the top choice for exceptional performance and reliability.</p>
+            <a href="about.html" class="feature-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="feature-card featured">
+            <div class="feature-icon"><i class="fa-solid fa-flask"></i></div>
+            <h3>Innovative Production</h3>
+            <p>We take pride in our innovative chick production techniques, which are unmatched in the industry.</p>
+            <a href="rd.html" class="feature-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+            <h3>24/7 Support</h3>
+            <p>We are committed to providing comprehensive support at every stage of your journey with us.</p>
+            <a href="contact.html" class="feature-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="about-section fade-in">
+      <div class="section-inner">
+        <div class="about-inner">
+          <div class="about-image-wrap">
+            <img src="https://images.unsplash.com/photo-1569880153113-76e33fc52d5f?w=800&q=80" alt="Day-old chick"/>
+            <div class="about-badge">
+              <span class="badge-number">20+</span>
+              <span class="badge-label">Years of Trust</span>
+            </div>
+          </div>
+          <div class="about-text">
+            <div class="section-tag">Who We Are</div>
+            <h2 class="section-title">Quality You Can<br>Count On</h2>
+            <p>At Amo Farm Sieberer Hatchery Ltd. (AFSH), we are committed to delivering the highest quality Day-Old Chicks in the industry. Since our inception in 2003, we have set the standard in poultry farming by combining innovative production techniques with state-of-the-art technology.</p>
+            <p style="margin-top:14px;">We ensure superior quality and reliability for our customers — farmers who trust us to give their flocks the best possible start.</p>
+            <a href="about.html" class="btn-primary" style="margin-top:28px;">Read More &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="products-section fade-in">
+      <div class="section-inner">
+        <div class="section-header" style="text-align:center;">
+          <div class="section-tag">What We Offer</div>
+          <h2 class="section-title" style="color:var(--orange);">Best Selling Products</h2>
+        </div>
+        <div class="products-grid">
+          <a href="products.html" class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=600&q=80" alt="Day-Old Pullets"/>
+              <div class="product-overlay"><i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+            <div class="product-info">
+              <h3>Day-Old Pullets</h3>
+              <p>High-laying potential layer chicks for commercial egg production.</p>
+            </div>
+          </a>
+          <a href="products.html" class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1612170153139-6f881ff067e0?w=600&q=80" alt="Day-Old Noilers"/>
+              <div class="product-overlay"><i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+            <div class="product-info">
+              <h3>Day-Old Noilers</h3>
+              <p>Hardy dual-purpose breed for both egg and meat production.</p>
+            </div>
+          </a>
+          <a href="products.html" class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1569880153113-76e33fc52d5f?w=600&q=80" alt="Day-Old Cockerels"/>
+              <div class="product-overlay"><i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+            <div class="product-info">
+              <h3>Day-Old Cockerels</h3>
+              <p>Fast-growing cockerels ideal for the free-range meat market.</p>
+            </div>
+          </a>
+          <a href="products.html" class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&q=80" alt="Day-Old Broilers"/>
+              <div class="product-overlay"><i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+            <div class="product-info">
+              <h3>Day-Old Broilers</h3>
+              <p>High-performance broiler chicks for commercial meat farming.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  
+    <section class="rd-section fade-in">
+      <div class="section-inner">
+        <div class="rd-inner">
+          <div class="rd-text">
+            <div class="section-tag" style="color:rgba(255,255,255,0.7); border-color:rgba(255,255,255,0.4);">Research &amp; Development</div>
+            <h2 class="section-title" style="color:var(--white);">Advancing Poultry<br>Science in Africa</h2>
+            <p style="color:rgba(255,255,255,0.75); font-weight:300; font-size:15px; line-height:25px;">Innovation and excellence drive our R&D efforts. A key milestone is the development of the Noiler — a hardy, dual-purpose breed for both egg and meat production.</p>
+            <p style="color:rgba(255,255,255,0.75); font-weight:300; font-size:15px; line-height:25px; margin-top:14px;">Noiler birds bridge the gap between backyard and commercial farming, providing smallholder farmers with sustainable income and improved nutrition.</p>
+            <a href="rd.html" class="btn-white" style="margin-top:28px;">Read More &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="rd-image-wrap">
+            <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=800&q=80" alt="Research"/>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="testimonials-section fade-in">
+      <div class="section-inner">
+        <div class="section-header" style="text-align:center;">
+          <div class="section-tag">Customer Stories</div>
+          <h2 class="section-title" style="color:var(--orange);">Customers Feedback</h2>
+        </div>
+        <div class="testimonials-slider">
+          <div class="testimonials-track" id="testimonialsTrack">
+            <div class="testimonial-card">
+              <div class="testimonial-quote"><i class="fa-solid fa-quote-left"></i></div>
+              <p>"Amo Farm is not just about good birds; their customer service is also very good. From the time I order to when I receive my chicks, their team is always ready to help. I trust Amo Farm, and I will continue to buy from them."</p>
+              <div class="testimonial-author">
+                <div class="author-avatar">CO</div>
+                <div>
+                  <strong>Chidi Onu</strong>
+                  <span>Poultry Farmer, Anambra</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-quote"><i class="fa-solid fa-quote-left"></i></div>
+              <p>"Amo Farm's Noiler chickens have really helped my business. They are strong, grow fast, and bring good profit. Their chicks are always healthy, and I don't have issues with them. I will always recommend Amo Farm to other farmers."</p>
+              <div class="testimonial-author">
+                <div class="author-avatar">SI</div>
+                <div>
+                  <strong>Salisu Ibrahim</strong>
+                  <span>Poultry Farmer, Kano</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-quote"><i class="fa-solid fa-quote-left"></i></div>
+              <p>"I have been buying chicks from Amo Farm for years, and they are always strong and healthy. They grow well, and I don't lose many of them. That's why I keep buying from Amo Farm. If you want good birds for your farm, they are the best choice."</p>
+              <div class="testimonial-author">
+                <div class="author-avatar">GO</div>
+                <div>
+                  <strong>Grace Olorunda</strong>
+                  <span>Poultry Farmer, Ogun</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="t-btn t-prev" id="tPrev"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="t-btn t-next" id="tNext"><i class="fa-solid fa-chevron-right"></i></button>
+          <div class="t-dots" id="tDots"></div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="join-section fade-in">
+      <div class="section-inner">
+        <div class="join-inner">
+          <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80" alt="AFSH Team" class="join-image"/>
+          <div class="join-text">
+            <div class="section-tag" style="color:rgba(255,255,255,0.7); border-color:rgba(255,255,255,0.4);">Careers</div>
+            <h2 class="section-title" style="color:var(--white);">Join Our Team</h2>
+            <p style="color:rgba(255,255,255,0.75); font-size:15px; font-weight:300; line-height:25px;">At Amo Farm, we regard our people as our greatest asset. We are dedicated to fostering a safe, motivating, and innovative work environment that helps our team thrive.</p>
+            <a href="careers.html" class="btn-white" style="margin-top:28px;">Discover More &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+  
+    <section class="blog-section fade-in">
+      <div class="section-inner">
+        <div class="section-header" style="text-align:center;">
+          <div class="section-tag">Latest Updates</div>
+          <h2 class="section-title">Get the Latest News<br>&amp; Industry Updates</h2>
+        </div>
+        <div class="blog-grid">
+          <a href="blog.html" class="blog-card">
+            <div class="blog-img">
+              <img src="https://images.unsplash.com/photo-1585384090194-f7d42ccb2429?w=600&q=80" alt="Blog"/>
+            </div>
+            <div class="blog-info">
+              <span class="blog-date">May 2026</span>
+              <h3>Amo Farm at NIPOLI EXPO 2026</h3>
+              <p>Driving innovation in Nigeria's poultry and livestock sector at the nation's premier expo.</p>
+              <span class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </a>
+          <a href="blog.html" class="blog-card">
+            <div class="blog-img">
+              <img src="https://images.unsplash.com/photo-1569880153113-76e33fc52d5f?w=600&q=80" alt="Blog"/>
+            </div>
+            <div class="blog-info">
+              <span class="blog-date">April 2026</span>
+              <h3>Getting Started in Poultry Farming</h3>
+              <p>What every first-time farmer should know before investing in day-old chick production.</p>
+              <span class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </a>
+          <a href="blog.html" class="blog-card">
+            <div class="blog-img">
+              <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&q=80" alt="Blog"/>
+            </div>
+            <div class="blog-info">
+              <span class="blog-date">March 2026</span>
+              <h3>Maximise Profits Despite Rising Feed Costs</h3>
+              <p>Practical strategies for Nigerian poultry farmers navigating a challenging economic climate.</p>
+              <span class="blog-link">Read More <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  
+    <section class="contact-strip fade-in">
+      <div class="section-inner">
+        <div class="contact-strip-inner">
+          <div class="contact-strip-text">
+            <h2>Have a Question? <span>Let's Talk.</span></h2>
+            <p>Whether you need product information, expert advice, or want to partner with us — our team is ready to help.</p>
+          </div>
+          <a href="contact.html" class="btn-primary">Contact Us &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+  
+    <div class="sister-section">
+      <div class="section-inner">
+        <h3>Our Sister Companies</h3>
+        <div class="sister-logos">
+          <a href="https://amobyng.com.ng/" target="_blank" class="sister-logo-box">
+            <img src="AMOBYNG-LOGO.png" alt="Sister Company 1"/>
+          </a>
+          <a href="https://natnudofoods.com/" target="_blank" class="sister-logo-box">
+            <img src="Natnudo-LOGO.png" alt="Sister Company 2"/>
+          </a>
+          <a href="https://diversaysolutions.com/" target="_blank" class="sister-logo-box">
+            <img src="Diversay-Sol.png" alt="Sister Company 3"/>
+          </a>
+          <a href="https://dslpharma.com/" target="_blank" class="sister-logo-box">
+            <img src="DSLP-Logo.png" alt="Sister Company 4"/>
+          </a>
+          <a href="https://noiler.net/" target="_blank" class="sister-logo-box">
+            <img src="Noiler-Logo.png" alt="Sister Company 5"/>
+          </a>
+        </div>
+      </div> 
+    </div>
+    
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo-text">
+            <strong>Amo Farm Sieberer Hatchery Ltd.</strong>
+            <small>The Source You Can Trust</small>
+          </div>
+          <p>Established in 2003, AFSH is dedicated to providing the finest Day-Old Chicks in the industry. Innovation, quality, and reliability — every flock, every time.</p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/OfficialAFSH" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/officialafsh" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/amo-farm-sieberer-hatchery-limited/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">Who We Are</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="rd.html">Research &amp; Development</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Our Products</h4>
+          <ul>
+            <li><a href="products.html">Day-Old Pullets</a></li>
+            <li><a href="products.html">Day-Old Noilers</a></li>
+            <li><a href="products.html">Day-Old Cockerels</a></li>
+            <li><a href="products.html">Day-Old Broilers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Info</h4>
+          <address>
+            <strong>Phone</strong>
+            +234 700 6000 600
+            <strong>Email</strong>
+            info@afshltd.com
+            <strong>Head Office</strong>
+            133A &amp; B Bashiru Shittu Street,<br>Magodo Phase II, Lagos
+            <strong>Hatchery — Oyo</strong>
+            1 Amo Road, Awe, Oyo State
+            <strong>Hatchery — Imo</strong>
+            190 Wetheral Road, Owerri, Imo State
+          </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Amo Farm Sieberer Hatchery Ltd. All rights reserved.</span>
+        <span>Built with care for African agriculture.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('mobileMenuBtn').addEventListener('click', function () {
+      const nav  = document.getElementById('navList');
+      const icon = document.getElementById('menuIcon');
+      nav.classList.toggle('open');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-xmark');
+    });
+
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    const dotsContainer = document.getElementById('heroDots');
+    let heroIndex = 0;
+    let heroTimer;
+
+    heroSlides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    function goToSlide(index) {
+      heroSlides[heroIndex].classList.remove('active');
+      dotsContainer.children[heroIndex].classList.remove('active');
+      heroIndex = (index + heroSlides.length) % heroSlides.length;
+      heroSlides[heroIndex].classList.add('active');
+      dotsContainer.children[heroIndex].classList.add('active');
+      resetTimer();
+    }
+
+    function resetTimer() {
+      clearInterval(heroTimer);
+      heroTimer = setInterval(() => goToSlide(heroIndex + 1), 5000);
+    }
+
+    document.getElementById('heroNext').addEventListener('click', () => goToSlide(heroIndex + 1));
+    document.getElementById('heroPrev').addEventListener('click', () => goToSlide(heroIndex - 1));
+    resetTimer();
+
+
+    const tTrack = document.getElementById('testimonialsTrack');
+    const tCards = tTrack.querySelectorAll('.testimonial-card');
+    const tDotsContainer = document.getElementById('tDots');
+    let tIndex = 0;
+
+    tCards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goToTestimonial(i));
+      tDotsContainer.appendChild(dot);
+    });
+
+    function goToTestimonial(index) {
+      tIndex = (index + tCards.length) % tCards.length;
+      tTrack.style.transform = `translateX(-${tIndex * 100}%)`;
+      document.querySelectorAll('#tDots .slider-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === tIndex);
+      });
+    }
+
+    document.getElementById('tNext').addEventListener('click', () => goToTestimonial(tIndex + 1));
+    document.getElementById('tPrev').addEventListener('click', () => goToTestimonial(tIndex - 1));
+    setInterval(() => goToTestimonial(tIndex + 1), 6000);
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

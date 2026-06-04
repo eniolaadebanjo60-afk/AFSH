@@ -322,6 +322,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 
 .location-contact span i {
@@ -378,12 +379,24 @@
     grid-template-columns: 1fr;
   }
 
+  .location-card {
+    text-align: center;
+  }
+  .location-icon{
+    margin:0 auto 18px;
+  }
+  .location-contact {
+    align-items: center;
+  }
+  .location-contact span {
+    justify-content: center;
+  }
   .sister-logos {
     gap: 16px;
   }
 
   .mv-icon{
-    margin-left: 110px;
+    margin:0 auto 18px;
   }
 }
 

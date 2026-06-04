@@ -251,10 +251,13 @@
     gap: 40px;
   }
 
-  .product-inner,
-  .product-inner.reverse {
+  .product-inner {
     flex-direction: column;
     gap: 36px;
+  }
+
+  .product-inner.reverse{
+    flex-direction: column-reverse;
   }
 
   .product-image-wrap,

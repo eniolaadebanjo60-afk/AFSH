@@ -323,14 +323,31 @@
       btn.classList.add('active');
     }
 
-    document.getElementById('contactForm').addEventListener('submit', function (e) {
-      e.preventDefault();
+    document.getElementById('contactForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const btn = this.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const result = await submitContactForm({
+      firstName: this.querySelector('input[placeholder="e.g. Emeka"]').value,
+      lastName:  this.querySelector('input[placeholder="e.g. Okonkwo"]').value,
+      email:     this.querySelector('input[type="email"]').value,
+      phone:     this.querySelector('input[type="tel"]').value,
+      subject:   this.querySelector('select').value,
+      message:   this.querySelector('textarea').value
+    });
+
+    if (result.success) {
       document.getElementById('formSuccess').style.display = 'flex';
       this.reset();
-      setTimeout(() => {
-        document.getElementById('formSuccess').style.display = 'none';
-      }, 5000);
-    });
+    } else {
+      alert('Something went wrong. Please try again.');
+    }
+
+    btn.textContent = 'Send Message';
+    btn.disabled = false;
+  });
 
 
     const observer = new IntersectionObserver(entries => {
@@ -338,5 +355,6 @@
     }, { threshold: 0.08 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
+  <script src="supabase.js"></script>
 </body>
 </html>

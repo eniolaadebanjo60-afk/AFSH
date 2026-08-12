@@ -48,7 +48,7 @@ img { max-width: 100%; display: block; }
 .login-left {
   width: 440px;
   flex-shrink: 0;
-  background: var(--sidebar-bg);
+  background: orange;
   display: flex;
   align-items: center;
   padding: 48px;
@@ -65,8 +65,7 @@ img { max-width: 100%; display: block; }
 .login-logo img {
   height: 56px;
   width: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.9;
+
 }
 
 .login-left h1 {
@@ -79,10 +78,10 @@ img { max-width: 100%; display: block; }
 
 .login-left p {
   font-size: 14px;
-  color: var(--sidebar-text);
+  color: #fff;
+  font-weight: 500;
   line-height: 22px;
   margin-bottom: 40px;
-  font-weight: 300;
 }
 
 .login-features {
@@ -96,11 +95,11 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: 12px;
   font-size: 13px;
-  color: var(--sidebar-text);
+  color: #fff;
 }
 
 .login-feature i {
-  color: var(--orange);
+  color: #000;
   font-size: 14px;
   width: 18px;
 }
@@ -127,7 +126,7 @@ img { max-width: 100%; display: block; }
 
 .login-sub {
   font-size: 14px;
-  color: var(--text-muted);
+  color: #000;
   margin-bottom: 32px;
 }
 
@@ -219,7 +218,7 @@ img { max-width: 100%; display: block; }
 .login-footer {
   text-align: center;
   font-size: 12px;
-  color: var(--text-muted);
+  color: #000;
   margin-top: 24px;
 }
 
@@ -231,7 +230,7 @@ img { max-width: 100%; display: block; }
 .sidebar {
   width: 240px;
   flex-shrink: 0;
-  background: var(--sidebar-bg);
+  background: orange;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -245,6 +244,7 @@ img { max-width: 100%; display: block; }
 
 .sidebar-logo {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
   padding: 20px 20px 16px;
@@ -253,16 +253,14 @@ img { max-width: 100%; display: block; }
 }
 
 .sidebar-logo img {
-  height: 36px;
-  width: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.9;
+  height: 80px;
+  width: 200px;
 }
 
-.sidebar-logo span {
+.sidebar-logo p {
   font-size: 12px;
   font-weight: 600;
-  color: var(--sidebar-text);
+  color:#000;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -279,7 +277,7 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
+  color: #000;
   padding: 16px 8px 6px;
 }
 
@@ -291,7 +289,7 @@ img { max-width: 100%; display: block; }
   border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
-  color: var(--sidebar-text);
+  color: #000;
   text-decoration: none;
   transition: background 0.2s, color 0.2s;
   margin-bottom: 2px;
@@ -315,12 +313,12 @@ img { max-width: 100%; display: block; }
 
 .nav-item.logout {
   margin-top: auto;
-  color: #EF4444;
+  color: red;
 }
 
 .nav-item.logout:hover {
   background: rgba(239,68,68,0.1);
-  color: #EF4444;
+  color: white;
 }
 
 .nav-badge {

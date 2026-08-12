@@ -77,7 +77,6 @@
 
   <script src="admin.js"></script>
   <script>
-    // Toggle password visibility
     function togglePassword() {
       var input = document.getElementById('loginPassword');
       var icon  = document.getElementById('eyeIcon');
@@ -113,7 +112,6 @@
       }
     });
 
-    // If already logged in redirect to dashboard
     if (localStorage.getItem('afsh_admin_user')) {
       window.location.href = 'dashboard.html';
     }

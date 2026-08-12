@@ -366,8 +366,6 @@
           }
         });
 
-
-        /* Wait for BOTH requests */
         const [supabaseResult, formspreeResponse] = await Promise.all([
           supabasePromise,
           formspreePromise
@@ -397,7 +395,6 @@
           console.error('Supabase submission failed.');
 
         }
-
 
         else if (supabaseSuccess && !formspreeSuccess) {
 

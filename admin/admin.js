@@ -48,7 +48,6 @@ function initDashboard() {
 }
 
 function showSection(name, el) {
-  // Hide all sections
   document.querySelectorAll('.content-section').forEach(function(s) {
     s.classList.remove('active');
   });
@@ -346,10 +345,10 @@ async function savePost(e, id) {
 
   try {
     if (id) {
-      await supabaseUpdate('POSTS', id, data);
+      await supabaseUpdate('Posts', id, data);
       showSuccess('Blog post updated successfully.');
     } else {
-      await supabaseInsert('POSTS', data);
+      await supabaseInsert('Posts', data);
       showSuccess('Blog post added successfully.');
     }
     closeModal();
@@ -361,7 +360,7 @@ async function savePost(e, id) {
 
 async function editPost(id) {
   try {
-    var posts = await supabaseFetch('POSTS', 'id=eq.' + id);
+    var posts = await supabaseFetch('Posts', 'id=eq.' + id);
     openModal('post', posts[0]);
   } catch(e) {
     showError('Failed to load post data.');
@@ -371,7 +370,7 @@ async function editPost(id) {
 function deletePost(id) {
   confirmDelete(async function() {
     try {
-      await supabaseDelete('POSTS', id);
+      await supabaseDelete('Posts', id);
       showSuccess('Post deleted.');
       loadPostsTable();
     } catch(e) {
@@ -450,10 +449,10 @@ async function saveProduct(e, id) {
 
   try {
     if (id) {
-      await supabaseUpdate('PRODUCTS', id, data);
+      await supabaseUpdate('Products', id, data);
       showSuccess('Product updated successfully.');
     } else {
-      await supabaseInsert('PRODUCTS', data);
+      await supabaseInsert('Products', data);
       showSuccess('Product added successfully.');
     }
     closeModal();
@@ -465,7 +464,7 @@ async function saveProduct(e, id) {
 
 async function editProduct(id) {
   try {
-    var products = await supabaseFetch('PRODUCTS', 'id=eq.' + id);
+    var products = await supabaseFetch('Products', 'id=eq.' + id);
     openModal('product', products[0]);
   } catch(e) {
     showError('Failed to load product data.');
@@ -475,7 +474,7 @@ async function editProduct(id) {
 function deleteProduct(id) {
   confirmDelete(async function() {
     try {
-      await supabaseDelete('PRODUCTS', id);
+      await supabaseDelete('Products', id);
       showSuccess('Product deleted.');
       loadProductsTable();
     } catch(e) {
@@ -489,7 +488,7 @@ async function loadTestimonialsTable() {
   tbody.innerHTML = '<tr><td colspan="6" class="loading-row"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</td></tr>';
 
   try {
-    var testimonials = await supabaseFetch('TESTIMONIALS', 'order=display_order.asc');
+    var testimonials = await supabaseFetch('Testimonials', 'order=display_order.asc');
     if (!testimonials || testimonials.length === 0) {
       tbody.innerHTML = '<tr><td colspan="6" class="empty-row">No testimonials yet.</td></tr>';
       return;
@@ -549,10 +548,10 @@ async function saveTestimonial(e, id) {
 
   try {
     if (id) {
-      await supabaseUpdate('TESTIMONIALS', id, data);
+      await supabaseUpdate('Testimonials', id, data);
       showSuccess('Testimonial updated.');
     } else {
-      await supabaseInsert('TESTIMONIALS', data);
+      await supabaseInsert('Testimonials', data);
       showSuccess('Testimonial added.');
     }
     closeModal();
@@ -564,7 +563,7 @@ async function saveTestimonial(e, id) {
 
 async function editTestimonial(id) {
   try {
-    var items = await supabaseFetch('TESTIMONIALS', 'id=eq.' + id);
+    var items = await supabaseFetch('Testimonials', 'id=eq.' + id);
     openModal('testimonial', items[0]);
   } catch(e) {
     showError('Failed to load testimonial data.');
@@ -574,7 +573,7 @@ async function editTestimonial(id) {
 function deleteTestimonial(id) {
   confirmDelete(async function() {
     try {
-      await supabaseDelete('TESTIMONIALS', id);
+      await supabaseDelete('Testimonials', id);
       showSuccess('Testimonial deleted.');
       loadTestimonialsTable();
     } catch(e) {
@@ -588,7 +587,7 @@ async function loadMessagesTable() {
   tbody.innerHTML = '<tr><td colspan="6" class="loading-row"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</td></tr>';
 
   try {
-    var messages = await supabaseFetch('MESSAGES', 'order=created_at.desc');
+    var messages = await supabaseFetch('Messages', 'order=created_at.desc');
     if (!messages || messages.length === 0) {
       tbody.innerHTML = '<tr><td colspan="6" class="empty-row">No messages yet.</td></tr>';
       return;
@@ -614,7 +613,7 @@ async function loadMessagesTable() {
 
 async function viewMessage(id) {
   try {
-    var messages = await supabaseFetch('MESSAGES', 'id=eq.' + id);
+    var messages = await supabaseFetch('Messages', 'id=eq.' + id);
     var m = messages[0];
     document.getElementById('modalTitle').textContent = 'Message from ' + m.first_name + ' ' + m.last_name;
     document.getElementById('modalBody').innerHTML =
@@ -640,7 +639,7 @@ async function viewMessage(id) {
 function deleteMessage(id) {
   confirmDelete(async function() {
     try {
-      await supabaseDelete('MESSAGES', id);
+      await supabaseDelete('Messages', id);
       showSuccess('Message deleted.');
       loadMessagesTable();
       loadUnreadCount();
@@ -652,7 +651,7 @@ function deleteMessage(id) {
 
 async function loadUnreadCount() {
   try {
-    var messages = await supabaseFetch('MESSAGES', 'is_read=eq.false');
+    var messages = await supabaseFetch('Messages', 'is_read=eq.false');
     var badge = document.getElementById('msgBadge');
     if (badge) {
       badge.textContent = messages ? messages.length : 0;

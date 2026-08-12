@@ -13,7 +13,7 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
       <img src="../AMOfarm-LOGO.png" alt="AFSH"/>
-      <span>Admin Panel</span>
+      <p>Admin Panel</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -242,7 +242,6 @@
 
   </main>
 
-  <!-- ── MODAL ── -->
   <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
   <div class="modal" id="modal">
     <div class="modal-header">
@@ -274,7 +273,6 @@
   <script src="../supabase.js"></script>
   <script src="admin.js"></script>
   <script>
-    // Check authentication
     var user = JSON.parse(localStorage.getItem('afsh_admin_user') || 'null');
     if (!user) {
       window.location.href = 'index.html';

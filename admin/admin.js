@@ -25,7 +25,7 @@ async function adminLogin(email, password) {
 
 function adminLogout() {
   localStorage.removeItem('afsh_admin_user');
-  window.location.href = 'index.html';
+  window.location.href = '/admin/index.html';
 }
 
 function initDashboard() {
@@ -628,8 +628,7 @@ async function viewMessage(id) {
       '</div>';
     document.getElementById('modalOverlay').style.display = 'block';
     document.getElementById('modal').style.display = 'flex';
-    // Mark as read
-    await supabaseUpdate('MESSAGES', id, { is_read: true });
+    await supabaseUpdate('Messages', id, { is_read: true });
     loadUnreadCount();
   } catch(e) {
     showError('Failed to load message.');

@@ -6,7 +6,7 @@
   <title>AFSH Admin – Dashboard</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@200,300,400,500,600,700,1&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="admin.css"/>
+  <link rel="stylesheet" href="/admin/admin.css"/>
 </head>
 <body class="dashboard-page">
 
@@ -271,7 +271,7 @@
   </div>
 
   <script src="../supabase.js"></script>
-  <script src="admin.js"></script>
+  <script src="/admin/admin.js"></script>
   <script>
     var user = JSON.parse(localStorage.getItem('afsh_admin_user') || 'null');
     if (!user) {

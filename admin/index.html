@@ -103,7 +103,7 @@
       var result = await adminLogin(email, pass);
 
       if (result.success) {
-        window.location.href = 'dashboard.html';
+        window.location.href = '/admin/dashboard.html';
       } else {
         error.style.display = 'flex';
         document.getElementById('loginErrorMsg').textContent = result.message || 'Invalid email or password.';
@@ -113,7 +113,7 @@
     });
 
     if (localStorage.getItem('afsh_admin_user')) {
-      window.location.href = 'dashboard.html';
+      window.location.href = '/admin/dashboard.html';
     }
   </script>
 </body>

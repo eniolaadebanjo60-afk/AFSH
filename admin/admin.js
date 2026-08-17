@@ -25,7 +25,7 @@ async function adminLogin(email, password) {
 
 function adminLogout() {
   localStorage.removeItem('afsh_admin_user');
-  window.location.href = '/admin/index.html';
+  window.location.href = 'index.html';
 }
 
 function initDashboard() {

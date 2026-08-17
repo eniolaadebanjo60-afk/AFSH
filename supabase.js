@@ -15,7 +15,7 @@ async function supabaseFetch(table, filters = '') {
   return response.json();
 }
 
-async function supabaseInsert(table, data) {
+async function supabaseInsert(table, data, returnData = true) {
   const url = `${SUPABASE_URL}/rest/v1/${table}`;
   const response = await fetch(url, {
     method: 'POST',
@@ -23,12 +23,12 @@ async function supabaseInsert(table, data) {
       'apikey': SUPABASE_KEY,
       'Authorization': `Bearer ${SUPABASE_KEY}`,
       'Content-Type': 'application/json',
-      'Prefer': 'return=representation'
+      'Prefer': returnData ? 'return=representation' : 'return=minimal'
     },
     body: JSON.stringify(data)
   });
   if (!response.ok) throw new Error(`Failed to insert into ${table}`);
-  return response.json();
+  return returnData ? response.json() : true;
 }
 
 async function supabaseUpdate(table, id, data) {
@@ -312,7 +312,7 @@ async function submitContactForm(formData) {
       subject:    formData.subject,
       message:    formData.message,
       is_read:    false
-    });
+    }, false);
     return { success: true };
   } catch (error) {
     console.error('Error submitting form:', error);

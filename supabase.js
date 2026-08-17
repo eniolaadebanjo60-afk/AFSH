@@ -17,17 +17,29 @@ async function supabaseFetch(table, filters = '') {
 
 async function supabaseInsert(table, data, returnData = true) {
   const url = `${SUPABASE_URL}/rest/v1/${table}`;
+
   const response = await fetch(url, {
     method: 'POST',
     headers: {
       'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
       'Content-Type': 'application/json',
       'Prefer': returnData ? 'return=representation' : 'return=minimal'
     },
     body: JSON.stringify(data)
   });
-  if (!response.ok) throw new Error(`Failed to insert into ${table}`);
+
+  if (!response.ok) {
+    const errorText = await response.text();
+
+    console.error('SUPABASE INSERT ERROR:', {
+      status: response.status,
+      statusText: response.statusText,
+      error: errorText
+    });
+
+    throw new Error(errorText);
+  }
+
   return returnData ? response.json() : true;
 }
 

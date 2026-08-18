@@ -1,29 +1,43 @@
 
-var ADMIN_USERS = [
-  { email: 'admin@afshltd.com',    password: 'Admin@1234',  name: 'IT Manager',        role: 'admin',            access: ['jobs','posts','products','testimonials','messages','settings'] },
-  { email: 'hr@afshltd.com',       password: 'HR@1234',     name: 'Talent Manager',    role: 'hr',               access: ['jobs'] },
-  { email: 'comms@afshltd.com',    password: 'Comms@1234',  name: 'Communications',    role: 'comms',            access: ['posts'] },
-  { email: 'cs@afshltd.com',       password: 'CS@1234',     name: 'Customer Service',  role: 'customer_service', access: ['products','testimonials','messages'] }
-];
+const supabaseClient = supabase.createClient(
+  'https://uvabqyxnongkfkhcebvo.supabase.co',
+  'sb_publishable_z9EV9DyjhjWvZb_Dg140jA_chP4CGhS'
+);
 
 async function adminLogin(email, password) {
-  var user = ADMIN_USERS.find(function(u) {
-    return u.email === email && u.password === password;
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: password
   });
 
-  if (user) {
-    localStorage.setItem('afsh_admin_user', JSON.stringify({
-      name:   user.name,
-      role:   user.role,
-      access: user.access,
-      email:  user.email
-    }));
-    return { success: true };
+  if (error) {
+    return { success: false, message: 'Invalid email or password.' };
   }
-  return { success: false, message: 'Invalid email or password.' };
+
+  const userId = data.user.id;
+
+  const { data: roleRow, error: roleError } = await supabaseClient
+    .from('admin_roles')
+    .select('role, access')
+    .eq('user_id', userId)
+    .single();
+
+  if (roleError || !roleRow) {
+    return { success: false, message: 'No role assigned to this account. Contact IT.' };
+  }
+
+  localStorage.setItem('afsh_admin_user', JSON.stringify({
+    name:   email.split('@')[0],
+    role:   roleRow.role,
+    access: roleRow.access,
+    email:  email
+  }));
+
+  return { success: true };
 }
 
-function adminLogout() {
+async function adminLogout() {
+  await supabaseClient.auth.signOut();
   localStorage.removeItem('afsh_admin_user');
   window.location.href = 'index.html';
 }

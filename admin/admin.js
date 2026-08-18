@@ -263,7 +263,7 @@ async function loadPostsTable() {
   tbody.innerHTML = '<tr><td colspan="6" class="loading-row"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</td></tr>';
 
   try {
-    var posts = await supabaseFetch('POSTS', 'order=published_at.desc');
+    var posts = await supabaseFetch('Posts', 'order=published_at.desc');
     if (!posts || posts.length === 0) {
       tbody.innerHTML = '<tr><td colspan="6" class="empty-row">No blog posts yet.</td></tr>';
       return;
@@ -384,7 +384,7 @@ async function loadProductsTable() {
   tbody.innerHTML = '<tr><td colspan="5" class="loading-row"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</td></tr>';
 
   try {
-    var products = await supabaseFetch('PRODUCTS', 'order=display_order.asc');
+    var products = await supabaseFetch('Products', 'order=display_order.asc');
     if (!products || products.length === 0) {
       tbody.innerHTML = '<tr><td colspan="5" class="empty-row">No products yet.</td></tr>';
       return;

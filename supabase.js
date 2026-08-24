@@ -1,13 +1,23 @@
-
 const SUPABASE_URL = 'https://uvabqyxnongkfkhcebvo.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_z9EV9DyjhjWvZb_Dg140jA_chP4CGhS';
 
+async function getAuthToken() {
+  if (typeof supabaseClient !== 'undefined') {
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    if (sessionData.session) {
+      return sessionData.session.access_token;
+    }
+  }
+  return SUPABASE_KEY;
+}
+
 async function supabaseFetch(table, filters = '') {
+  const token = await getAuthToken();
   const url = `${SUPABASE_URL}/rest/v1/${table}?${filters}`;
   const response = await fetch(url, {
     headers: {
       'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     }
   });
@@ -16,40 +26,30 @@ async function supabaseFetch(table, filters = '') {
 }
 
 async function supabaseInsert(table, data, returnData = true) {
+  const token = await getAuthToken();
   const url = `${SUPABASE_URL}/rest/v1/${table}`;
-
   const response = await fetch(url, {
     method: 'POST',
     headers: {
       'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
       'Prefer': returnData ? 'return=representation' : 'return=minimal'
     },
     body: JSON.stringify(data)
   });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-
-    console.error('SUPABASE INSERT ERROR:', {
-      status: response.status,
-      statusText: response.statusText,
-      error: errorText
-    });
-
-    throw new Error(errorText);
-  }
-
+  if (!response.ok) throw new Error(`Failed to insert into ${table}`);
   return returnData ? response.json() : true;
 }
 
 async function supabaseUpdate(table, id, data) {
+  const token = await getAuthToken();
   const url = `${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`;
   const response = await fetch(url, {
     method: 'PATCH',
     headers: {
       'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
       'Prefer': 'return=representation'
     },
@@ -60,12 +60,13 @@ async function supabaseUpdate(table, id, data) {
 }
 
 async function supabaseDelete(table, id) {
+  const token = await getAuthToken();
   const url = `${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`;
   const response = await fetch(url, {
     method: 'DELETE',
     headers: {
       'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     }
   });

@@ -18,7 +18,7 @@ async function adminLogin(email, password) {
 
   const { data: roleRow, error: roleError } = await supabaseClient
     .from('admin_roles')
-    .select('role, access')
+    .select('role, access, display_name, avatar_url')
     .eq('user_id', userId)
     .single();
 
@@ -27,10 +27,11 @@ async function adminLogin(email, password) {
   }
 
   localStorage.setItem('afsh_admin_user', JSON.stringify({
-    name:   email.split('@')[0],
-    role:   roleRow.role,
-    access: roleRow.access,
-    email:  email
+    name:       roleRow.display_name || email.split('@')[0],
+    role:       roleRow.role,
+    access:     roleRow.access,
+    email:      email,
+    avatar_url: roleRow.avatar_url || null
   }));
 
   return { success: true };
@@ -46,13 +47,21 @@ function initDashboard() {
   var user = JSON.parse(localStorage.getItem('afsh_admin_user'));
   if (!user) return;
 
-  var allSections = ['jobs','posts','products','testimonials','messages','settings'];
+  var allSections = ['jobs','posts','testimonials','messages','settings'];
   allSections.forEach(function(section) {
     var navItem = document.querySelector('[onclick="showSection(\'' + section + '\', this)"]');
     if (navItem && user.access.indexOf(section) === -1) {
       navItem.style.display = 'none';
     }
   });
+
+  var contentLabels = document.querySelectorAll('.nav-section-label');
+  var contentSections = ['jobs','posts','testimonials'];
+  var hasContentAccess = contentSections.some(function(s) { return user.access.indexOf(s) !== -1; });
+  var hasMessagesAccess = user.access.indexOf('messages') !== -1;
+
+  if (contentLabels[0] && !hasContentAccess) contentLabels[0].style.display = 'none';
+  if (contentLabels[1] && !hasMessagesAccess) contentLabels[1].style.display = 'none';
 
   var firstSection = user.access[0];
   var firstNav = document.querySelector('[onclick="showSection(\'' + firstSection + '\', this)"]');
@@ -62,6 +71,8 @@ function initDashboard() {
 }
 
 function showSection(name, el) {
+  localStorage.setItem('afsh_last_section', name);
+
   document.querySelectorAll('.content-section').forEach(function(s) {
     s.classList.remove('active');
   });
@@ -76,7 +87,6 @@ function showSection(name, el) {
 
   if (name === 'jobs')         loadJobsTable();
   if (name === 'posts')        loadPostsTable();
-  if (name === 'products')     loadProductsTable();
   if (name === 'testimonials') loadTestimonialsTable();
   if (name === 'messages')     loadMessagesTable();
 
@@ -213,7 +223,6 @@ function buildJobForm(data) {
 function buildForm(type, data) {
   if (type === 'job')         return buildJobForm(data);
   if (type === 'post')        return buildPostForm(data);
-  if (type === 'product')     return buildProductForm(data);
   if (type === 'testimonial') return buildTestimonialForm(data);
   return '';
 }
@@ -393,108 +402,24 @@ function deletePost(id) {
   });
 }
 
-async function loadProductsTable() {
-  var tbody = document.getElementById('productsTableBody');
-  tbody.innerHTML = '<tr><td colspan="5" class="loading-row"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</td></tr>';
+async function uploadImage(file, folder) {
+  const token = await getAuthToken();
+  const fileExt = file.name.split('.').pop();
+  const fileName = folder + '/' + Date.now() + '-' + Math.random().toString(36).substring(2) + '.' + fileExt;
 
-  try {
-    var products = await supabaseFetch('Products', 'order=display_order.asc');
-    if (!products || products.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="5" class="empty-row">No products yet.</td></tr>';
-      return;
-    }
-    tbody.innerHTML = products.map(function(p) {
-      return '<tr>' +
-        '<td><strong>' + p.name + '</strong></td>' +
-        '<td>' + p.tagline + '</td>' +
-        '<td>' + p.display_order + '</td>' +
-        '<td>' + statusBadge(p.is_active) + '</td>' +
-        '<td class="actions">' +
-          '<button class="btn-icon btn-edit" onclick="editProduct(' + p.id + ')"><i class="fa-solid fa-pen"></i></button>' +
-          '<button class="btn-icon btn-delete" onclick="deleteProduct(' + p.id + ')"><i class="fa-solid fa-trash"></i></button>' +
-        '</td>' +
-      '</tr>';
-    }).join('');
-  } catch(e) {
-    tbody.innerHTML = '<tr><td colspan="5" class="empty-row">Failed to load products.</td></tr>';
-  }
-}
-
-function buildProductForm(data) {
-  var d = data || {};
-  return '<form id="productForm" onsubmit="saveProduct(event,' + (d.id||'null') + ')">' +
-    '<div class="form-row">' +
-      '<div class="form-group"><label>Product Name *</label><input class="form-input" name="name" value="' + (d.name||'') + '" required/></div>' +
-      '<div class="form-group"><label>Tagline *</label><input class="form-input" name="tagline" value="' + (d.tagline||'') + '" placeholder="e.g. Layer Chicks" required/></div>' +
-    '</div>' +
-    '<div class="form-group"><label>Image URL *</label><input class="form-input" name="image_url" value="' + (d.image_url||'') + '" placeholder="https://..." required/></div>' +
-    '<div class="form-group"><label>Short Description * <small>(for homepage cards)</small></label><textarea class="form-input form-textarea" name="short_description" required>' + (d.short_description||'') + '</textarea></div>' +
-    '<div class="form-group"><label>Full Description * <small>(for products page)</small></label><textarea class="form-input form-textarea" name="full_description" required>' + (d.full_description||'') + '</textarea></div>' +
-    '<div class="form-group"><label>Key Features * <small>(one per line)</small></label><textarea class="form-input form-textarea" name="features" placeholder="High egg production potential&#10;Early sexual maturity&#10;Excellent feed conversion" required>' + (d.features ? JSON.parse(d.features).join('\n') : '') + '</textarea></div>' +
-    '<div class="form-row">' +
-      '<div class="form-group"><label>Display Order</label><input class="form-input" type="number" name="display_order" value="' + (d.display_order||1) + '"/></div>' +
-      '<div class="form-group"><label>Show on Website</label>' +
-        '<select class="form-input" name="is_active">' +
-          '<option value="true"' + (d.is_active!==false?' selected':'') + '>Yes — Active</option>' +
-          '<option value="false"' + (d.is_active===false?' selected':'') + '>No — Hidden</option>' +
-        '</select>' +
-      '</div>' +
-    '</div>' +
-    '<div class="modal-actions">' +
-      '<button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>' +
-      '<button type="submit" class="btn-primary">Save Product</button>' +
-    '</div>' +
-  '</form>';
-}
-
-async function saveProduct(e, id) {
-  e.preventDefault();
-  var form = document.getElementById('productForm');
-  var data = {
-    name:              form.name.value,
-    tagline:           form.tagline.value,
-    image_url:         form.image_url.value,
-    short_description: form.short_description.value,
-    full_description:  form.full_description.value,
-    features:          JSON.stringify(form.features.value.split('\n').filter(function(l){ return l.trim(); })),
-    display_order:     parseInt(form.display_order.value) || 1,
-    is_active:         form.is_active.value === 'true'
-  };
-
-  try {
-    if (id) {
-      await supabaseUpdate('Products', id, data);
-      showSuccess('Product updated successfully.');
-    } else {
-      await supabaseInsert('Products', data);
-      showSuccess('Product added successfully.');
-    }
-    closeModal();
-    loadProductsTable();
-  } catch(err) {
-    showError('Failed to save product.');
-  }
-}
-
-async function editProduct(id) {
-  try {
-    var products = await supabaseFetch('Products', 'id=eq.' + id);
-    openModal('product', products[0]);
-  } catch(e) {
-    showError('Failed to load product data.');
-  }
-}
-
-function deleteProduct(id) {
-  confirmDelete(async function() {
-    try {
-      await supabaseDelete('Products', id);
-      showSuccess('Product deleted.');
-      loadProductsTable();
-    } catch(e) {
-      showError('Failed to delete product.');
-    }
+  const response = await fetch(`${SUPABASE_URL}/storage/v1/object/images/${fileName}`, {
+    method: 'POST',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': file.type
+    },
+    body: file
   });
+
+  if (!response.ok) throw new Error('Failed to upload image');
+
+  return `${SUPABASE_URL}/storage/v1/object/public/images/${fileName}`;
 }
 
 async function loadTestimonialsTable() {
@@ -644,6 +569,7 @@ async function viewMessage(id) {
     document.getElementById('modal').style.display = 'flex';
     await supabaseUpdate('Messages', id, { is_read: true });
     loadUnreadCount();
+    loadMessagesTable();  
   } catch(e) {
     showError('Failed to load message.');
   }
@@ -671,4 +597,122 @@ async function loadUnreadCount() {
       badge.style.display = messages && messages.length > 0 ? 'inline-block' : 'none';
     }
   } catch(e) {}
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var changePassForm = document.getElementById('changePasswordForm');
+  if (changePassForm) {
+    changePassForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      var currentPass = document.getElementById('currentPass').value;
+      var newPass     = document.getElementById('newPass').value;
+      var confirmPass = document.getElementById('confirmPass').value;
+
+      if (newPass !== confirmPass) {
+        showError('New passwords do not match.');
+        return;
+      }
+
+      if (newPass.length < 8) {
+        showError('New password must be at least 8 characters.');
+        return;
+      }
+
+      var user = JSON.parse(localStorage.getItem('afsh_admin_user'));
+      if (!user) return;
+
+      const { error: verifyError } = await supabaseClient.auth.signInWithPassword({
+        email: user.email,
+        password: currentPass
+      });
+
+      if (verifyError) {
+        showError('Current password is incorrect.');
+        return;
+      }
+
+      const { error: updateError } = await supabaseClient.auth.updateUser({
+        password: newPass
+      });
+
+      if (updateError) {
+        showError('Failed to update password. Please try again.');
+        return;
+      }
+
+      showSuccess('Password updated successfully.');
+      changePassForm.reset();
+    });
+  }
+});
+
+document.addEventListener('DOMContentLoaded', async function() {
+  var profileForm = document.getElementById('profileForm');
+  if (profileForm) {
+    var user = JSON.parse(localStorage.getItem('afsh_admin_user'));
+    if (user) {
+      const { data: roleRow } = await supabaseClient
+        .from('admin_roles')
+        .select('display_name, avatar_url')
+        .eq('user_id', await getCurrentUserId())
+        .single();
+
+      if (roleRow) {
+        if (roleRow.display_name) {
+          document.getElementById('displayNameInput').value = roleRow.display_name;
+        }
+        if (roleRow.avatar_url) {
+          document.getElementById('avatarPreview').innerHTML =
+            '<img src="' + roleRow.avatar_url + '" style="width:60px; height:60px; border-radius:50%; object-fit:cover;"/>';
+        }
+      }
+    }
+
+    profileForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      var newName = document.getElementById('displayNameInput').value.trim();
+      var fileInput = document.getElementById('avatarInput');
+      var avatarUrl = null;
+
+      if (fileInput.files && fileInput.files[0]) {
+        try {
+          avatarUrl = await uploadImage(fileInput.files[0], 'avatars');
+        } catch (err) {
+          showError('Failed to upload photo. Please try again.');
+          return;
+        }
+      }
+
+      var updateData = { display_name: newName };
+      if (avatarUrl) updateData.avatar_url = avatarUrl;
+
+      const { error } = await supabaseClient
+        .from('admin_roles')
+        .update(updateData)
+        .eq('user_id', await getCurrentUserId());
+
+      if (error) {
+        showError('Failed to update profile.');
+        return;
+      }
+
+      var user = JSON.parse(localStorage.getItem('afsh_admin_user'));
+      user.name = newName || user.name;
+      if (avatarUrl) user.avatar_url = avatarUrl;
+      localStorage.setItem('afsh_admin_user', JSON.stringify(user));
+      document.getElementById('userName').textContent = user.name;
+      if (user.avatar_url) {
+        document.getElementById('userAvatar').innerHTML = '<img src="' + user.avatar_url + '" style="width:100%; height:100%; border-radius:50%; object-fit:cover;"/>';
+      }
+
+      showSuccess('Profile updated successfully.');
+    });
+  }
+});
+
+async function getCurrentUserId() {
+  const { data } = await supabaseClient.auth.getUser();
+  return data.user.id;
 }

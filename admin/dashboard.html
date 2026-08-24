@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@200,300,400,500,600,700,1&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="/admin/admin.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 </head>
 <body class="dashboard-page">
 
@@ -20,16 +20,13 @@
     <nav class="sidebar-nav">
       <div class="nav-section-label">Content</div>
       <a href="#" class="nav-item active" onclick="showSection('jobs', this)">
-        <i class="fa-solid fa-briefcase"></i> Job Roles
+        Job Roles
       </a>
       <a href="#" class="nav-item" onclick="showSection('posts', this)">
-        <i class="fa-solid fa-newspaper"></i> Blog Posts
-      </a>
-      <a href="#" class="nav-item" onclick="showSection('products', this)">
-        <i class="fa-solid fa-egg"></i> Products
+        Blog Posts
       </a>
       <a href="#" class="nav-item" onclick="showSection('testimonials', this)">
-        <i class="fa-solid fa-comment-dots"></i> Testimonials
+        Testimonials
       </a>
 
       <div class="nav-section-label">Inbox</div>
@@ -131,34 +128,6 @@
       </div>
     </section>
 
-    <section class="content-section" id="section-products">
-      <div class="section-header">
-        <div>
-          <h2>Products</h2>
-          <p>Manage product listings shown on the products page.</p>
-        </div>
-        <button class="btn-primary" onclick="openModal('product')">
-          <i class="fa-solid fa-plus"></i> Add Product
-        </button>
-      </div>
-      <div class="data-table-wrap">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Tagline</th>
-              <th>Order</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="productsTableBody">
-            <tr><td colspan="5" class="loading-row"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
     <section class="content-section" id="section-testimonials">
       <div class="section-header">
         <div>
@@ -222,6 +191,21 @@
         </div>
       </div>
       <div class="settings-card">
+        <h3>Profile</h3>
+        <form id="profileForm">
+          <div class="form-group">
+            <label>Display Name</label>
+            <input type="text" id="displayNameInput" class="form-input" placeholder="Enter your display name"/>
+          </div>
+          <div class="form-group">
+            <label>Profile Photo</label>
+            <input type="file" id="avatarInput" class="form-input" accept="image/*"/>
+            <div id="avatarPreview" style="margin-top:8px;"></div>
+          </div>
+          <button type="submit" class="btn-primary">Update Profile</button>
+        </form>
+      </div>
+      <div class="settings-card">
         <h3>Change Password</h3>
         <form id="changePasswordForm">
           <div class="form-group">
@@ -280,7 +264,11 @@
     } else {
       document.getElementById('userName').textContent = user.name;
       document.getElementById('userRole').textContent = user.role;
-      document.getElementById('userAvatar').textContent = user.name.split(' ').map(function(n) { return n[0]; }).join('').slice(0,2).toUpperCase();
+      if (user.avatar_url) {
+        document.getElementById('userAvatar').innerHTML = '<img src="' + user.avatar_url + '" style="width:100%; height:100%; border-radius:50%; object-fit:cover; background-color:#fff"/>';
+      } else {
+        document.getElementById('userAvatar').textContent = user.name.split(' ').map(function(n) { return n[0]; }).join('').slice(0,2).toUpperCase();
+      }
       initDashboard();
     }
   </script>
